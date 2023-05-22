@@ -1,6 +1,12 @@
+mod args;
+mod finder;
+
 use std::{env, process};
 
-use minigrep::{run, Config};
+
+use crate::args::Config;
+use crate::finder::execute;
+
 
 fn main() {
     let args = env::args().collect::<Vec<String>>();
@@ -10,7 +16,7 @@ fn main() {
         process::exit(1);
     });
 
-    if let Err(e) = run(config) {
+    if let Err(e) = execute(config) {
         eprintln!("{e}");
         process::exit(1);
     }
